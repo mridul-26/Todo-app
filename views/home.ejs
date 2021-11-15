@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/home.css">
+
+</head>
+<body>
+    
+    <div id="main">
+        <br>
+        <h1 id="heading">
+            Todo App
+        </h1>
+        <form action="/create-todo" method="post">
+            <div id="description">
+                <p style="font-size: 24px;font-weight: 500;">DESCRIPTION</p>
+                <input id="form-descripition" type="text" name="description" placeholder="Add Task" required>
+            </div>
+
+            <div class="category-date">
+
+                <div id="category">
+                    <p style="font-size: 24px;font-weight: 500;" id="category-heading">CATEGORY</p>
+                    <p id="category-value">Choose one</p>
+                </div>
+
+                <select name="category">
+                    <option style="display: none;"></option>
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="school">School</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="other">Other</option>
+                </select>
+
+
+                <div id="due-date">
+                    <p style="font-size: 24px;font-weight: 500;">DUE DATE</p>
+                    <input id="date-input" type="date" name="date" placeholder="" required>
+                </div>
+
+            </div>
+
+            <div class="buttons">
+                <br>
+                <div>
+                    <button type="submit" class="add-button">
+                        Add TASK
+                    </button>
+                </div>
+
+                &nbsp;
+
+                <div>
+                    <button type="submit" class="delete-button">
+                        DELETE TASKS
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="show">
+            <form id="delete1" action="/delete-todo" method="post">
+
+                <% for(let i = todo_list.length - 1; i>=0 ; i--){ %>
+                
+                    <div id="task">
+                        <input type="checkbox" id="check-box" name="task" value="<%= todo_list[i]._id %>">
+                    
+                        <div class="task-container">
+                            <span id="task-description">
+                                <%= todo_list[i].description %>
+                            </span>
+                            <br>
+                            <span id="task-date">
+                                <%= todo_list[i].date %>
+                            </span>
+                        </div>
+
+                        <div id="task-category">
+                            <%= todo_list[i].category %>
+                        </div>
+
+                        <div id="delete-task">
+                            <a href="/delete_todo_single/?id=<%= todo_list[i]._id %>">
+                                DELETE
+                            </a>
+                        </div>
+                    
+                    </div>
+                
+                <% } %>
+
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
